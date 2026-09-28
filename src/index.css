@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@theme {
+  --color-night: #050b24;
+  --color-dusk: #12224f;
+  --color-ivory: #f5f3ea;
+  --font-display: "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  background-color: var(--color-night);
+  color: var(--color-ivory);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* ---------- Keyframes ---------- */
+
+@keyframes twinkle {
+  0%, 100% { opacity: var(--star-opacity, 1); }
+  50% { opacity: calc(var(--star-opacity, 1) * 0.25); }
+}
+
+@keyframes flicker {
+  0%, 100% { transform: scale(1, 1) skewX(0deg); }
+  25% { transform: scale(0.95, 1.06) skewX(2deg); }
+  50% { transform: scale(1.04, 0.95) skewX(-2deg); }
+  75% { transform: scale(0.97, 1.03) skewX(1deg); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.85; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+@keyframes ember-rise {
+  0% { opacity: 0; transform: translate(0, 0) scale(1); }
+  15% { opacity: 1; }
+  100% { opacity: 0; transform: translate(var(--drift, 0px), -14rem) scale(0.4); }
+}
+
+.anim-twinkle { animation: twinkle var(--dur, 4s) ease-in-out var(--delay, 0s) infinite; }
+.anim-flicker { animation: flicker var(--dur, 1.4s) ease-in-out var(--delay, 0s) infinite; }
+.anim-glow { animation: glow-pulse 3.5s ease-in-out infinite; }
+.anim-ember { animation: ember-rise var(--dur, 3s) ease-out var(--delay, 0s) infinite; }
+
+/* Stop all decorative motion for people who ask for less of it. */
+@media (prefers-reduced-motion: reduce) {
+  .anim-twinkle,
+  .anim-flicker,
+  .anim-glow,
+  .anim-ember {
+    animation: none;
+  }
+  .anim-ember {
+    display: none;
+  }
+}
